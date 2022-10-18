@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-end">
+            <a href="/" class="btn btn-outline-success">Tax Calculator</a>
+        </div>
+        <div class="col">
+            <a href="/billmanager" class="btn btn-success billmanager">Bill Manager</a>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <hr style="height:2px; width:100%; border-width:0; color: black; background-color:black" />
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h5>Net Salary</h5>
+            <form #netSalaryForm="ngForm" (ngSubmit)="onSubmit(netSalaryForm)">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">KSH</span>
+                            <input type="number" class="form-control" id="salary" aria-label="Amount (to the nearest dollar)" name="Netsalary" ngModel>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-success billmanager">Submit</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 p-3 bills">
+            <table class="table">
+               
+                <tbody id="data">
+                    <tr *ngFor="let it of itemsRepository">
+                        <!-- <td>{{it.id}}</td> -->
+                        <td>{{it.title}}</td><td>{{it.amount}}</td>
+                        <button type="button" (click) = "DeleteItem(it.id)"
+                        class='btn btn-danger text-danger'>Delete</button>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <h5>Add Items</h5>
+            <form #addItem="ngForm" (ngSubmit)="AddItems(addItem)">
+                
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Item</span>
+                    <input type="text" class="form-control" placeholder="Item" id="item" name="item" ngModel>
+                    <span class="input-group-text">Amount</span>
+                    <input type="number" class="form-control" placeholder="Amount" name="amount" ngModel>
+                    <span class="input-group-text">Month</span>
+                    <select type="text" class="form-control" placeholder="Month"
+                    name="month" ngModel>
+                        <option [ngValue] = 'c.name' *ngFor="let c of monthsList">{{c.name}}</option>
+                    </select>
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-success billmanager" >Submit</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-6 bills">
+            <hr/>
+            <table class="table">
+                <tbody id="calculations">
+
+                    <tr>
+                        <td>Net Salary</td><td>{{netSalary}}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Bill</td><td>{{totalBill}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>Balance</td>
+                        <td class='bg-danger'>KSH. {{netSalary - totalBill}}</td>
+                    </tr> -->
+
+                    <tr>
+                        <td>Balance</td>
+                        <td class='bg-success billmanager'>KSH. {{netSalary - totalBill}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <hr/>
+</div>
